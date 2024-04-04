@@ -115,25 +115,77 @@ Prompt the user to roll the dice.
 "Roll" two n-sided dice, display the results of each, and then ask the user if he/she wants to roll the dice again.
 Use static methods to implement the method(s) that generate the random numbers.
 Use the .random method of the java.lang.Math class to generate random numbers.*/
-public static void dice() {
-    Scanner scanner = new Scanner(System.in);
-    Random random = new Random();
+// public static void dice() {
+//     Scanner scanner = new Scanner(System.in);
+//     Random random = new Random();
 
-    System.out.println("Enter the number of sides for 2 dice. You may pick from 4 - 60: ");
+//     System.out.println("Enter the number of sides for 2 dice. You may pick from 4 - 60: ");
+//     int input = scanner.nextInt();
+
+//     boolean rollDice = true;
+//     while (rollDice) {
+//         System.out.print("Roll the dice? [y/n] ");
+//         String choice = scanner.next();
+//         rollDice = choice.equalsIgnoreCase("y");
+//         if (rollDice) {
+//             int dice1 = random.nextInt(input) + 1;
+//             int dice2 = random.nextInt(input) + 1;
+//             System.out.println("Your dice resulats are: " + dice1 + " and " + dice2);
+//         }
+//         } scanner.close();
+// }
+////---------------------------------------------------------------- GAME DEVELOPMENT 101
+/* Welcome to the world of game development!
+You are going to build a high-low guessing game. Create a class named HighLow inside of src.
+The specs for the game are:
+Game picks a random number between 1 and 100.
+Prompts user to guess the number.
+All user inputs are validated.
+If user's guess is less than the number, it outputs "HIGHER".
+If user's guess is more than the number, it outputs "LOWER".
+If a user guesses the number, the game should declare "GOOD GUESS!"
+Hints
+Use the random method of the java.lang.Math class to generate a random number.
+Bonus:
+Keep track of how many guesses a user makes.
+Set an upper limit on the number of guesses.*/
+public static void game() {
+Scanner scanner = new Scanner(System.in);
+Random random = new Random();
+int randomNumber = random.nextInt(100) + 1;
+int counter = 0;
+int endCounter = 0;
+boolean winnerWinner = true;
+
+while (winnerWinner) {
+counter++;
+endCounter++;
+if (endCounter == 7) {
+    winnerWinner = false;
+    System.out.println("YOU HAVE FAILED US!! ALL IS LOST :(");
+    break;
+}
+System.out.print("Pick a numerical value from 1 - 100: ");
+System.out.println("You have " + (7 - endCounter) + " tries left.");
+ if (scanner.hasNextInt()) {
     int input = scanner.nextInt();
-
-    boolean rollDice = true;
-    while (rollDice) {
-        System.out.print("Roll the dice? [y/n] ");
-        String choice = scanner.next();
-        rollDice = choice.equalsIgnoreCase("y");
-        if (rollDice) {
-            int dice1 = random.nextInt(input) + 1;
-            int dice2 = random.nextInt(input) + 1;
-            System.out.println("Your dice resulats are: " + dice1 + " and " + dice2);
+   if (input < 1 || input > 100) {
+    System.out.println("Invalid input");
+    } else {
+        if (input == randomNumber) {
+            winnerWinner = false;
+            System.out.println("Good guessin homie. you got it right in " + counter + " tries");
+        } else if (input > randomNumber) {
+            System.out.println("Bring it down now y'all");
+        } else {
+            System.out.println("Can we get much higher");
         }
-        } scanner.close();
-
+    }
+} else {
+    System.out.println("Invalid input.");
+    scanner.next();
+} 
+}scanner.close(); 
 }
 //------------------------------------------------------------------ MAIN
     public static void main(String[] args) {
@@ -144,6 +196,7 @@ public static void dice() {
         // System.out.println(modulus(7, 4));
         // getInteger();
         // factor();
-        dice();
+        // dice();
+        game();
     }
 }
