@@ -1,6 +1,7 @@
 package JavaOne;
 
 import java.util.Scanner;
+import java.util.Random;
 
 public class MethodsExercise {
 ////------------------------------------------------------------------ SIMPLE MATH
@@ -76,40 +77,64 @@ Factorials are denoted by the exclamation point (n!). Ex:
 2! = 1 x 2           = 2
 3! = 1 x 2 x 3       = 6
 4! = 1 x 2 x 3 x 4   = 24*/
-public static void factor() {
-    boolean keepGoing = true;
+// public static void factor() {
+//     boolean keepGoing = true;
 
-    while (keepGoing) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a number from 1-10");
+//     while (keepGoing) {
+//         Scanner scanner = new Scanner(System.in);
+//         System.out.println("Enter a number from 1-10");
 
-        if (scanner.hasNextLong()) {
-            long input = scanner.nextLong();
-            if (input < 1 || input > 10) {
-                System.out.println("That is not a numerical value from 1 - 10");
-                scanner.next(); // Clear the invalid input
-            } else {
-                long factorial = 1;
-                for (long i = 1; i <= input; i++) {
-                    factorial *= i;
-                }
-                System.out.println(input + "! = " + factorial);
-            }
-        } else {
-            System.out.println("Invalid input. Enter a numerical value from 1 - 10.");
-            scanner.next(); // Clear the invalid input
-        }
+//         if (scanner.hasNextLong()) {
+//             long input = scanner.nextLong();
+//             if (input < 1 || input > 10) {
+//                 System.out.println("That is not a numerical value from 1 - 10");
+//                 scanner.next();
+//             } else {
+//                 long factorial = 1;
+//                 for (long i = 1; i <= input; i++) {
+//                     factorial *= i;
+//                 }
+//                 System.out.println(input + "! = " + factorial);
+//             }
+//         } else {
+//             System.out.println("Invalid input. Enter a numerical value from 1 - 10.");
+//             scanner.next();
+//         }
 
-        System.out.println("Do you wish to continue? [y/n]");
+//         System.out.println("Do you wish to continue? [y/n]");
+//         String choice = scanner.next();
+//         keepGoing = choice.equalsIgnoreCase("y");
+//         scanner.close();
+//         scanner.nextLine(); 
+//     }
+// }
+//------------------------------------------------------------------ ROLL THE DICE
+/*Create an application that simulates dice rolling.
+Ask the user to enter the number of sides for a pair of dice.
+Prompt the user to roll the dice.
+"Roll" two n-sided dice, display the results of each, and then ask the user if he/she wants to roll the dice again.
+Use static methods to implement the method(s) that generate the random numbers.
+Use the .random method of the java.lang.Math class to generate random numbers.*/
+public static void dice() {
+    Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+
+    System.out.println("Enter the number of sides for 2 dice. You may pick from 4 - 60: ");
+    int input = scanner.nextInt();
+
+    boolean rollDice = true;
+    while (rollDice) {
+        System.out.print("Roll the dice? [y/n] ");
         String choice = scanner.next();
-        keepGoing = choice.equalsIgnoreCase("y");
-        scanner.close();
-        scanner.nextLine(); 
-    }
+        rollDice = choice.equalsIgnoreCase("y");
+        if (rollDice) {
+            int dice1 = random.nextInt(input) + 1;
+            int dice2 = random.nextInt(input) + 1;
+            System.out.println("Your dice resulats are: " + dice1 + " and " + dice2);
+        }
+        } scanner.close();
+
 }
-
-
-
 //------------------------------------------------------------------ MAIN
     public static void main(String[] args) {
         // System.out.println(adding(1, 3));
@@ -118,6 +143,7 @@ public static void factor() {
         // System.out.println(dividing(9, 3));
         // System.out.println(modulus(7, 4));
         // getInteger();
-        factor();
+        // factor();
+        dice();
     }
 }
