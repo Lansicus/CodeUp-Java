@@ -150,42 +150,39 @@ Bonus:
 Keep track of how many guesses a user makes.
 Set an upper limit on the number of guesses.*/
 public static void game() {
-Scanner scanner = new Scanner(System.in);
-Random random = new Random();
-int randomNumber = random.nextInt(100) + 1;
-int counter = 0;
-int endCounter = 0;
-boolean winnerWinner = true;
+    Scanner scanner = new Scanner(System.in);
+    Random random = new Random();
+    int randomNumber = random.nextInt(100) + 1;
+    int counter = 0;
+    int maxAttempts = 7;
 
-while (winnerWinner) {
-counter++;
-endCounter++;
-if (endCounter == 7) {
-    winnerWinner = false;
-    System.out.println("YOU HAVE FAILED US!! ALL IS LOST :(");
-    break;
-}
-System.out.print("Pick a numerical value from 1 - 100: ");
-System.out.println("You have " + (7 - endCounter) + " tries left.");
- if (scanner.hasNextInt()) {
-    int input = scanner.nextInt();
-   if (input < 1 || input > 100) {
-    System.out.println("Invalid input");
-    } else {
-        if (input == randomNumber) {
-            winnerWinner = false;
-            System.out.println("Good guessin homie. you got it right in " + counter + " tries");
-        } else if (input > randomNumber) {
-            System.out.println("Bring it down now y'all");
-        } else {
-            System.out.println("Can we get much higher");
+    while (true) {
+        counter++;
+        if (counter == maxAttempts) {
+            System.out.println("YOU HAVE FAILED US!! ALL IS LOST :(");
+            break;
         }
-    }
-} else {
-    System.out.println("Invalid input.");
-    scanner.next();
-} 
-}scanner.close(); 
+        System.out.println("Pick a number from 1 - 100");
+        System.out.println("You have " + (maxAttempts - counter) + " attempts left");
+
+        if (!scanner.hasNextInt()) {
+            System.out.println("Invalid input");
+            scanner.next();
+            continue;
+        }
+
+        int input = scanner.nextInt();
+        if (input < 1 || input > 100) {
+            System.out.println("input must be from 1 - 100");
+        } else if (input == randomNumber) {
+            System.out.println("Good guessin homie. U got it right in " + counter + " tries");
+            break;
+        } else if (input < randomNumber) {
+            System.out.println("Can we get much higher?");
+        } else {
+            System.out.println("Bring it down now y'all");
+        }
+    } scanner.close();
 }
 //------------------------------------------------------------------ MAIN
     public static void main(String[] args) {
